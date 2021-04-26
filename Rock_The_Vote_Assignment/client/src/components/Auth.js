@@ -8,7 +8,7 @@ export default function Auth(){
   const [inputs, setInputs] = useState(initInputs)
   const [toggle, setToggle] = useState(false)
 
-  const { signup, login } = useContext(UserContext)
+  const {signup, login, errMsg, resetAuthErr} = useContext(UserContext)
 
   function handleChange(e){
     const {name, value} = e.target 
@@ -28,6 +28,11 @@ export default function Auth(){
     login(inputs)
   }
 
+  function toggleForm() {
+    setToggle(prev => !prev)
+    resetAuthErr()
+  }
+
   return (
       <div className="auth-container">
           <h1>Rock The Vote</h1>
@@ -38,9 +43,10 @@ export default function Auth(){
                         handleSubmit={handleSignup}
                         inputs={inputs}
                         btnText="Sign up!"
+                        errMsg={errMsg}
                     />
                     
-                    <p onClick={() => setToggle(prev => !prev)}>Already have an account?</p>
+                    <p onClick={() => toggleForm}>Already have an account?</p>
                 </>
             :
                 <>
@@ -49,9 +55,10 @@ export default function Auth(){
                         handleSubmit={handleLogin}
                         inputs={inputs}
                         btnText="Login"
+                        errMsg={errMsg}
                     />
                     
-                    <p onClick={() => setToggle(prev => !prev)}>Don't have an account?</p>
+                    <p onClick={() => toggleForm}>Don't have an account?</p>
                 </>
             }
       </div>

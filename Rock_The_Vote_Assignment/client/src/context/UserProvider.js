@@ -15,9 +15,24 @@ export default function UserProvider(props) {
     const initState = { 
         user: JSON.parse(localStorage.getItem('user')) || {},
         token: localStorage.getItem('token') || "",
-        issues: []
+        issues: [],
+        errMsg: ''
     }
     const [userState, setUserState] = useState(initState)
+
+    function handleAuthErr(errMsg){
+        setUserState(prevState => ({
+            ...prevState,
+            errMsg
+        }))
+    }
+
+    function resetAuthErr(){
+        setUserState(prevState => ({
+            ...prevState,
+            errMsg: ''
+        }))
+    }
 
     function signup(credentials) {
         axios.post('/auth/signup', credentials)
@@ -31,7 +46,7 @@ export default function UserProvider(props) {
                     token
                 }))
             })
-            .catch (err => console.log(err.response.data.errMsg))
+            .catch (err => handleAuthErr(err.response.data.errMsg))
     }
 
     function login(credentials) {
@@ -46,7 +61,7 @@ export default function UserProvider(props) {
                     token
                 }))
             })
-            .catch (err => console.log(err.response.data.errMsg))
+            .catch (err => handleAuthErr(err.response.data.errMsg))
     }
 
     function logout() {
@@ -64,7 +79,7 @@ export default function UserProvider(props) {
                     isssues: [...prevState.issues, res.data]
                 }))
             })
-            .catch(err => console.log(err.response.data.errMsg))
+            .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     function getUserIssues() {
@@ -75,11 +90,11 @@ export default function UserProvider(props) {
                 isssues: res.data
             }))
         })
-        .catch(err => console.log(err.response.data.errMsg))
+        .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     return (
-        <UserContext.Provider value={{...userState, signup, login, logout, addIssue}}>
+        <UserContext.Provider value={{...userState, signup, login, logout, addIssue, resetAuthErr}}>
             {props.children}
         </UserContext.Provider>
     )
