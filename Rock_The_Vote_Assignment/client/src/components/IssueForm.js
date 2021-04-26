@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 
 const initInputs = {
   title: "",
@@ -7,7 +7,7 @@ const initInputs = {
 
 export default function IssueForm(props){
   const [inputs, setInputs] = useState(initInputs)
-  const { addIssue } = props
+  const {addIssue} = props
 
   function handleChange(e){
     const {name, value} = e.target
@@ -23,7 +23,7 @@ export default function IssueForm(props){
     setInputs(initInputs)
   }
 
-  const { title, description } = inputs
+  const {title, description} = inputs
   return (
     <form onSubmit={handleSubmit}>
       <input 
