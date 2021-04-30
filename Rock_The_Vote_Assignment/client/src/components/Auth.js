@@ -29,6 +29,7 @@ export default function Auth(){
   }
 
   function toggleForm() {
+      console.log("hello")
     setToggle(prev => !prev)
     resetAuthErr()
   }
@@ -46,7 +47,7 @@ export default function Auth(){
                         errMsg={errMsg}
                     />
                     
-                    <p onClick={() => toggleForm}>Already have an account?</p>
+                    <p onClick={toggleForm}>Already have an account?</p>
                 </>
             :
                 <>
@@ -58,7 +59,7 @@ export default function Auth(){
                         errMsg={errMsg}
                     />
                     
-                    <p onClick={() => toggleForm}>Don't have an account?</p>
+                    <p onClick={toggleForm}>Don't have an account?</p>
                 </>
             }
       </div>

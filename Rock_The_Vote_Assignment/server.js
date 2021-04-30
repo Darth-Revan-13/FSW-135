@@ -16,10 +16,10 @@ mongoose.connect('mongodb://localhost:27017/votes',
   () => console.log("Connected to the DB")
 )
 
-app.use("/api/user", require("./routes/userRouter.js"));
-app.use("/api/comment", require("./routes/commentRouter.js"));
+app.use("/user", require("./routes/userRouter.js"));
+app.use("/comment", require("./routes/commentRouter.js"));
 app.use("/api/issue", require("./routes/issueRouter"));
-app.use("/api/auth", require("./routes/authRouter"));
+app.use("/auth", require("./routes/authRouter"));
 app.use('/api', expressJwt({secret: process.env.SECRET, algorithms: ['RS256']}))
 
 app.use((err, req, res, next) => {

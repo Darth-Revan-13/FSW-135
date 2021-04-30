@@ -2,10 +2,10 @@ import React from 'react'
 import Issue from './Issue.js'
 
 export default function IssueList(props){
-  const {issues} = props
+  const {issue} = props
   return (
     <div className="issue-list">
-      {issues.map(issue => <Issue {...issue} key={issue._id}/>)}
+      {issue.map(issue => <Issue key={issue._id} {...issue}/>)}
     </div>
   )
 }

@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
 import axios from 'axios'
-import {json} from 'express'
-import user from '../../../models/user'
 export const UserContext = React.createContext()
 
 const userAxios = axios.create()
@@ -76,7 +74,7 @@ export default function UserProvider(props) {
             .then(res => {
                 setUserState(prevState => ({
                     ...prevState,
-                    isssues: [...prevState.issues, res.data]
+                    issue: [...prevState.issue, res.data]
                 }))
             })
             .catch(err => handleAuthErr(err.response.data.errMsg))
@@ -87,7 +85,7 @@ export default function UserProvider(props) {
         .then(res => {
             setUserState(prevState => ({
                 ...prevState,
-                isssues: res.data
+                issue: res.data
             }))
         })
         .catch(err => handleAuthErr(err.response.data.errMsg))
